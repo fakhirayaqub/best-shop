@@ -3,8 +3,26 @@ import "./home.css";
 
 function CreateSearchBar() {
   const [keyword, setKeyword] = useState("iphone");
+  const [products, setProducts] = useState([]);
 
-  function searchButton() {
+  // sync and async
+  // async doing something out of order
+
+  // sync
+
+  // 1. Chop onions
+  // 2. Cook onions until they are a golden color // wait until the step is done!
+  // 3. Chop pepper
+  // 4. Add peppers to the pan
+
+  // async
+  // 1. Chop onions
+  // 2. start cooking
+  // 3. Chop pepper
+  // 2. Cook onions until they are a golden color // wait until the step is done!
+  // 4. Add peppers to the pan
+
+  async function searchButton() {
     // console.log("this is title", keyword);
 
     const baseURL =
@@ -17,44 +35,36 @@ function CreateSearchBar() {
       "&RESPONSE-DATA-FORMAT=JSON" +
       "&REST-PAYLOAD" +
       `&keywords=${keyword}` +
-      "&paginationInput.entriesPerPage=6" +
+      "&paginationInput.entriesPerPage=20" +
       "&GLOBAL-ID=EBAY-US" +
       "&siteid=0";
+
     const proxyURL = "https://cors-anywhere.herokuapp.com/";
     const completeURL = proxyURL + baseURL + queryParams;
+    const response = await fetch(completeURL);
 
-    try {
-      fetch(completeURL)
-        .then((response) => response.json())
-        .then((data) => {
-          // console.log(data);
-          console.log("!", data.findItemsByKeywordsResponse);
-          const response = data.findItemsByKeywordsResponse;
-          // console.log("!!", response[0]);
-          // console.log("!!!", response[0].searchResult);
+    const data = await response.json();
 
-          const searchResults = response[0].searchResult[0].item; // is an array with 6 elements
+    console.log("wtf", data);
+    // console.log("!", data.findItemsByKeywordsResponse);
+    const further = data.findItemsByKeywordsResponse;
 
-          showSearchRetuls(searchResults);
+    const searchResults = further[0].searchResult[0].item; // is an array with 6 elements
 
-          function showSearchRetuls(results) {
-            results.forEach((eachItem) => {
-              let productDetails = {
-                name: eachItem.title,
-                location: eachItem.location,
-                photo: eachItem.galleryURL,
-                itemNum: eachItem.itemId,
-              };
+    console.log("search", searchResults);
+    const array = [];
+    searchResults.forEach((eachItem) => {
+      let productDetails = {
+        name: eachItem.title[0],
+        location: eachItem.location[0],
+        photo: eachItem.galleryURL[0],
+        itemNum: eachItem.itemId[0],
+      };
+      array.push(productDetails);
+    });
 
-              console.log("each item is", productDetails);
-            });
-          }
-        });
-    } catch (error) {
-      console.log("error is", error);
-    }
+    setProducts(array);
   }
-
   return (
     <div className="search-bar">
       <input
@@ -62,6 +72,29 @@ function CreateSearchBar() {
         onChange={(event) => setKeyword(event.target.value)}
       ></input>
       <button onClick={() => searchButton()}>Search</button>
+      <Product donkey={products} another={keyword} color="blue" />
+    </div>
+  );
+}
+// You searched for the keyword:
+
+function Product({ donkey, another, color }) {
+  const productElements = [];
+  // const productsLocation = [];
+
+  donkey.forEach((item, index) => {
+    const itemName = <p key={index} > {item.name} {item.location} {item.itemNum} </p>;
+
+    productElements.push(itemName);
+    
+  });
+
+  return (
+    <div>
+      <p>A MEOW PRODUCT</p>
+    
+      {productElements}
+     
     </div>
   );
 }
