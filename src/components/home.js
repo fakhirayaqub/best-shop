@@ -46,7 +46,7 @@ function CreateSearchBar() {
       let productDetails = {
         name: eachItem.title[0],
         location: eachItem.location[0],
-        photo: eachItem.galleryURL[0],
+        galleryURL: eachItem.galleryURL[0],
         itemNum: eachItem.itemId[0],
       };
       array.push(productDetails);
@@ -72,6 +72,7 @@ function Product({ properties }) {
   properties.forEach((item, index) => {
     const itemName = (
       <div className="container" key={index}>
+      <img src={item.galleryURL} />
        <p className="product-name"> {item.name}</p> 
        <p>Location available: {item.location}</p> 
        <p>Product# {item.itemNum}</p> 
