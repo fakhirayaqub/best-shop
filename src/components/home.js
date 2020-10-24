@@ -71,17 +71,17 @@ function Product({ properties }) {
   const productElements = [];
   properties.forEach((item, index) => {
     const itemName = (
-      <p key={index}>
-        {" "}
-        {item.name} {item.location} {item.itemNum}{" "}
-      </p>
+      <div className="container" key={index}>
+       <p className="product-name"> {item.name}</p> 
+       <p>Location available: {item.location}</p> 
+       <p>Product# {item.itemNum}</p> 
+      </div>
     );
     productElements.push(itemName);
   });
 
   return (
-    <div>
-      
+    <div >
       {productElements}
     </div>
   );

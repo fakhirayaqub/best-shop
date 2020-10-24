@@ -7,6 +7,13 @@ body {
     background-color: lightcoral;
   }
 
+  .container{
+    display: inline-flexbox;
+    background-color: lightgray;
+    width: 500px;
+    margin: 0 auto;
+   
+  }
 
 .search-bar {
 display: flexbox;
@@ -14,5 +21,11 @@ padding-top: 20%;
 }
 
 .product-display{
-display: flexbox;
+
+
+}
+
+.product-name{
+  font-size: larger;
+  font-weight: bold;
 }
