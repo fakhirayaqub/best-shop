@@ -2,32 +2,19 @@ import React, { useState } from "react";
 import "./home.css";
 
 function CreateSearchBar() {
+  //need to figure out how to set state to empty for getting error
   const [keyword, setKeyword] = useState("iphone");
   const [products, setProducts] = useState([]);
 
   // sync and async
-  // async doing something out of order
-
-  // sync
-
-  // 1. Chop onions
-  // 2. Cook onions until they are a golden color // wait until the step is done!
-  // 3. Chop pepper
-  // 4. Add peppers to the pan
-
-  // async
-  // 1. Chop onions
-  // 2. start cooking
-  // 3. Chop pepper
-  // 2. Cook onions until they are a golden color // wait until the step is done!
-  // 4. Add peppers to the pan
-
+  // async doing something out of order but async await = sync
   async function searchButton() {
-    // console.log("this is title", keyword);
+    // console.log("this is search word", keyword);
 
     const baseURL =
       "https://svcs.sandbox.ebay.com/services/search/FindingService/v1?";
     // select all selected characters: command + control + g
+    // breakdown api address for future editing
     const queryParams =
       "SECURITY-APPNAME=FakhiraY-bestshop-PRD-3e65479d5-631ff4ed" +
       "&OPERATION-NAME=findItemsByKeywords" +
@@ -39,19 +26,21 @@ function CreateSearchBar() {
       "&GLOBAL-ID=EBAY-US" +
       "&siteid=0";
 
+    // use proxy url to overcome security hizards
     const proxyURL = "https://cors-anywhere.herokuapp.com/";
     const completeURL = proxyURL + baseURL + queryParams;
     const response = await fetch(completeURL);
-
+    // convert data to json format
     const data = await response.json();
 
-    console.log("wtf", data);
+    // console.log("wtf", data);
     // console.log("!", data.findItemsByKeywordsResponse);
     const further = data.findItemsByKeywordsResponse;
 
-    const searchResults = further[0].searchResult[0].item; // is an array with 6 elements
+    const searchResults = further[0].searchResult[0].item; // is an array with all elements
 
     console.log("search", searchResults);
+    // create array of products with details we want
     const array = [];
     searchResults.forEach((eachItem) => {
       let productDetails = {
@@ -62,7 +51,7 @@ function CreateSearchBar() {
       };
       array.push(productDetails);
     });
-
+    // set state of products to this array we created
     setProducts(array);
   }
   return (
@@ -72,29 +61,28 @@ function CreateSearchBar() {
         onChange={(event) => setKeyword(event.target.value)}
       ></input>
       <button onClick={() => searchButton()}>Search</button>
-      <Product donkey={products} another={keyword} color="blue" />
+      <Product properties={products} />
     </div>
   );
 }
-// You searched for the keyword:
 
-function Product({ donkey, another, color }) {
+// create a componenet to display product and properties 
+function Product({ properties }) {
   const productElements = [];
-  // const productsLocation = [];
-
-  donkey.forEach((item, index) => {
-    const itemName = <p key={index} > {item.name} {item.location} {item.itemNum} </p>;
-
+  properties.forEach((item, index) => {
+    const itemName = (
+      <p key={index}>
+        {" "}
+        {item.name} {item.location} {item.itemNum}{" "}
+      </p>
+    );
     productElements.push(itemName);
-    
   });
 
   return (
     <div>
-      <p>A MEOW PRODUCT</p>
-    
+      
       {productElements}
-     
     </div>
   );
 }

@@ -11,9 +11,8 @@ body {
 .search-bar {
 display: flexbox;
 padding-top: 20%;
+}
 
-
-    
-   
-    
+.product-display{
+display: flexbox;
 }
