@@ -45,9 +45,10 @@ function CreateSearchBar() {
     searchResults.forEach((eachItem) => {
       let productDetails = {
         name: eachItem.title[0],
-        location: eachItem.location[0],
+        location: eachItem.country[0],
         galleryURL: eachItem.galleryURL[0],
         itemNum: eachItem.itemId[0],
+        subtitle: eachItem.subtitle[0]
       };
       array.push(productDetails);
     });
@@ -76,13 +77,14 @@ function Product({ properties }) {
        <p className="product-name"> {item.name}</p> 
        <p>Location available: {item.location}</p> 
        <p>Product# {item.itemNum}</p> 
+       <p>Offer: {item.subtitle}</p> 
       </div>
     );
     productElements.push(itemName);
   });
 
   return (
-    <div >
+    <div className="main">
       {productElements}
     </div>
   );

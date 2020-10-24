@@ -9,7 +9,7 @@ body {
 
   .container{
     display: inline-flexbox;
-    background-color: lightgray;
+    background-color: rgb(143, 108, 108);
     width: 500px;
     margin: 0 auto;
    
@@ -17,11 +17,12 @@ body {
 
 .search-bar {
 display: flexbox;
-padding-top: 20%;
+padding-top: 5%;
 }
 
-.product-display{
-
+.main{
+  padding-top: 2%;
+ 
 
 }
 
