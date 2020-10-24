@@ -47,9 +47,13 @@ function CreateSearchBar() {
         name: eachItem.title[0],
         location: eachItem.country[0],
         galleryURL: eachItem.galleryURL[0],
+        sellingPrice: eachItem.sellingStatus[0].currentPrice[0].__value__,
         itemNum: eachItem.itemId[0],
-        subtitle: eachItem.subtitle[0]
+        //figure our about subtitle/shipping info because they are different in differend product data
+        subtitle: eachItem.subtitle
       };
+
+      console.log("the price is", productDetails.sellingPrice)
       array.push(productDetails);
     });
     // set state of products to this array we created
@@ -76,6 +80,7 @@ function Product({ properties }) {
       <div className="container" key={index}>
       <img src={item.galleryURL} />
        <p className="product-name"> {item.name}</p> 
+       <p > Price: {item.sellingPrice}$ </p> 
        <p>Location available: {item.location}</p> 
        <p>Product# {item.itemNum}</p> 
        <p>Offer: {item.subtitle}</p> 
