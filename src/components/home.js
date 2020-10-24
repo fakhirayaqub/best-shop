@@ -72,13 +72,18 @@ function Product({ properties }) {
   const productElements = [];
   properties.forEach((item, index) => {
     const itemName = (
+      <div className="main-container">
       <div className="container" key={index}>
       <img src={item.galleryURL} />
        <p className="product-name"> {item.name}</p> 
        <p>Location available: {item.location}</p> 
        <p>Product# {item.itemNum}</p> 
        <p>Offer: {item.subtitle}</p> 
-      </div>
+       <button>add to cart</button>
+    <p></p>
+       </div>
+       
+       </div>
     );
     productElements.push(itemName);
   });
