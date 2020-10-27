@@ -1,0 +1,35 @@
+
+
+
+
+
+body {
+    background-color: lightcoral;
+  }
+
+  
+  .container{
+    padding-top: 2%;
+    display: inline-flexbox;
+    background-color: rgb(143, 108, 108);
+    width: 500px;
+    margin: 0 auto;
+   
+  }
+
+.search-bar {
+display: flexbox;
+padding-top: 5%;
+}
+
+.main{
+  padding-top: 2%;
+ 
+
+}
+
+.product-name{
+  
+  font-size: larger;
+  font-weight: bold;
+}
