@@ -5,6 +5,7 @@ function CreateSearchBar() {
   //need to figure out how to set state to empty for getting error
   const [keyword, setKeyword] = useState("iphone");
   const [products, setProducts] = useState([]);
+  // const [cartItems, setCartItems] = useState(0);
 
   // sync and async
   // async doing something out of order but async await = sync
@@ -16,7 +17,7 @@ function CreateSearchBar() {
     // select all selected characters: command + control + g
     // breakdown api address for future editing
     const queryParams =
-      "SECURITY-APPNAME=FakhiraY-bestshop-PRD-3e65479d5-631ff4ed" +
+      "SECURITY-APPNAME={please enter your api key}" +
       "&OPERATION-NAME=findItemsByKeywords" +
       "&SERVICE-VERSION=1.0.0" +
       "&RESPONSE-DATA-FORMAT=JSON" +
@@ -84,8 +85,8 @@ function Product({ properties }) {
        <p>Location available: {item.location}</p> 
        <p>Product# {item.itemNum}</p> 
        <p>Offer: {item.subtitle}</p> 
-       <button>add to cart</button>
-    <p></p>
+       <button onClick={() => createCart()} > add to cart</button>
+      <p></p>
        </div>
        
        </div>
@@ -93,11 +94,22 @@ function Product({ properties }) {
     productElements.push(itemName);
   });
 
+
+  function createCart() {
+ 
+  console.log(" this is cart" )
+  
+  }
+
   return (
     <div className="main">
       {productElements}
     </div>
   );
 }
+
+
+
+
 
 export default CreateSearchBar;
